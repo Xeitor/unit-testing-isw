@@ -6,9 +6,10 @@ class Carrito
 
   def add_article(article)
     check_stock = article.check_stock_and_decrement
-    if !check_stock || article.description.nil?
-      raise StandardError, "Error al agregar artículo"
-    end
+    raise StandardError, "Error al agregar artículo, no tiene stock" if !check_stock
+    raise StandardError, "Error al agregar artículo, no tiene nombre" if article.product_name.nil?
+    raise StandardError, "Error al agregar artículo, no tiene descripcion" if article.description.nil?
+    raise StandardError, "Error al agregar artículo, no tiene precio" if article.price.nil?
     @articles.push(article)
   end
 end
